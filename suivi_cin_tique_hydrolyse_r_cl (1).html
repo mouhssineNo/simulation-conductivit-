@@ -1,0 +1,1251 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suivi Cinétique par Conductimétrie - Hydrolyse du R-Cl</title>
+
+    <!-- Facebook / Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://votre-site.com/suivi-cinetique.html">
+    <meta property="og:title" content="🧪 Suivi Cinétique par Conductimétrie - Simulation Interactive & Correction">
+    <meta property="og:description" content="Découvrez cette simulation interactive de l'hydrolyse du 2-chloro-2-méthylpropane : montage conductimétrique, tracé de la courbe de conductivité et correction détaillée étape par étape !">
+    <meta property="og:image" content="https://votre-site.com/preview-image.jpg">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="🧪 Suivi Cinétique par Conductimétrie">
+    <meta name="twitter:description" content="Simulation interactive et correction pas à pas du suivi cinétique par conductimétrie.">
+    <meta name="twitter:image" content="https://votre-site.com/preview-image.jpg">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- KaTeX CSS & JS for LaTeX math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/mhchem.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js"></script>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(226, 232, 240, 0.8);
+        }
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #94a3b8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #64748b;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen pb-12">
+
+<header class="bg-slate-900 text-white sticky top-0 z-50 shadow-md">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-4">
+        <div class="flex items-center space-x-3">
+            <div class="bg-emerald-500 p-2.5 rounded-xl shadow-lg text-white">
+                <i class="fa-solid fa-bolt text-xl"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-lg leading-tight sm:text-xl">Suivi Cinétique par Conductimétrie</h1>
+                <p class="text-xs text-slate-400">Hydrolyse du 2-chloro-2-méthylpropane &bull; \(\mathrm{R-Cl + 2\,H_2O \rightarrow ROH + H_3O^+_{(aq)} + Cl^-_{(aq)}}\)</p>
+            </div>
+        </div>
+
+        <div class="flex items-center space-x-2 text-sm">
+            <a href="#simulation" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition">
+                <i class="fa-solid fa-play text-emerald-400 mr-1"></i> Simulation
+            </a>
+            <a href="#correction" class="px-3 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-medium transition shadow-sm">
+                <i class="fa-solid fa-book-open mr-1"></i> Questions & Réponses
+            </a>
+            <a href="#quiz" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 transition">
+                <i class="fa-solid fa-graduation-cap text-amber-400 mr-1"></i> QCM
+            </a>
+        </div>
+    </div>
+</header>
+
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 space-y-8" id="simulation">
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+        <!-- Column 1: Lab Apparatus & Controls (5 Cols) -->
+        <div class="lg:col-span-5 flex flex-col space-y-6">
+            
+            <!-- Experimental Canvas Box -->
+            <div class="glass-panel rounded-2xl p-5 shadow-sm flex flex-col justify-between">
+                <div class="flex justify-between items-center mb-3">
+                    <h2 class="font-bold text-slate-800 flex items-center gap-2">
+                        <i class="fa-solid fa-vial text-emerald-600"></i> Montage Conductimétrique
+                    </h2>
+                    <span class="text-xs font-semibold px-2.5 py-1 bg-emerald-100 text-emerald-700 rounded-full flex items-center gap-1">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-ping"></span> En Direct
+                    </span>
+                </div>
+
+                <!-- Canvas Wrapper -->
+                <div class="relative bg-slate-900 rounded-xl overflow-hidden shadow-inner flex justify-center items-center">
+                    <canvas id="expCanvas" width="480" height="280" class="w-full h-auto block"></canvas>
+                    
+                    <!-- Digital Conductimeter Display Overlay -->
+                    <div class="absolute top-3 left-3 bg-slate-800/95 backdrop-blur border border-emerald-500/50 rounded-xl p-3 text-center shadow-lg">
+                        <div class="text-[10px] text-slate-400 uppercase tracking-wider font-semibold flex items-center justify-center gap-1">
+                            <i class="fa-solid fa-microchip text-emerald-400"></i> Conductimètre Digital
+                        </div>
+                        <div class="text-xl font-bold text-emerald-400 font-mono my-0.5" id="dispSigma">00.000</div>
+                        <div class="text-[11px] text-slate-300 font-semibold font-mono">mS &middot; cm<sup>-1</sup></div>
+                    </div>
+                </div>
+
+                <!-- Live stats bar -->
+                <div class="grid grid-cols-3 gap-2 mt-4 text-center">
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                        <span class="text-[11px] text-slate-500 block">Temps \(t\)</span>
+                        <span class="font-bold text-slate-800 text-sm font-mono" id="dispTime">0.0 min</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                        <span class="text-[11px] text-slate-500 block">Avancement \(x(t)\)</span>
+                        <span class="font-bold text-emerald-600 text-sm font-mono" id="dispAdv">0.00 mmol</span>
+                    </div>
+                    <div class="bg-slate-50 border border-slate-200 rounded-lg p-2">
+                        <span class="text-[11px] text-slate-500 block">Dép. Conductivité</span>
+                        <span class="font-bold text-amber-600 text-sm font-mono" id="dispSpeed">0.00 mS/(cm&middot;min)</span>
+                    </div>
+                </div>
+
+                <!-- Simulation Action Buttons -->
+                <div class="flex items-center gap-2 mt-4">
+                    <button id="btnStart" onclick="startSim()" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white py-2.5 px-4 rounded-xl font-semibold text-sm transition shadow-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-play"></i> Lancer
+                    </button>
+                    <button id="btnPause" onclick="pauseSim()" class="bg-amber-500 hover:bg-amber-600 text-white py-2.5 px-4 rounded-xl font-semibold text-sm transition shadow-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-pause"></i> Pause
+                    </button>
+                    <button id="btnReset" onclick="resetSim()" class="bg-rose-600 hover:bg-rose-700 text-white py-2.5 px-4 rounded-xl font-semibold text-sm transition shadow-sm flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-rotate-left"></i> Réinitialiser
+                    </button>
+                </div>
+            </div>
+
+            <!-- Experimental Parameters Adjustment -->
+            <div class="glass-panel rounded-2xl p-5 shadow-sm space-y-4">
+                <div class="flex justify-between items-center border-b border-slate-200 pb-2">
+                    <h3 class="font-bold text-slate-800 text-sm flex items-center gap-2">
+                        <i class="fa-solid fa-sliders text-emerald-600"></i> Conditions Expérimentales
+                    </h3>
+                    <button onclick="resetParameters()" class="text-xs text-emerald-600 hover:underline">
+                        Valeurs de l'énoncé
+                    </button>
+                </div>
+
+                <!-- Sliders Grid -->
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <div class="flex justify-between text-slate-700 mb-1">
+                            <span>Volume \(V_{\mathrm{RCl}}\) de 2-chloro-2-méthylpropane :</span>
+                            <span class="font-bold font-mono text-emerald-700" id="valVRCl">1.0 mL</span>
+                        </div>
+                        <input type="range" id="paramVRCl" min="0.5" max="2.0" step="0.1" value="1.0" oninput="updateParameters()" class="w-full accent-emerald-500 cursor-pointer">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-slate-700 mb-1">
+                            <span>Volume eau-acétone \(V_{\mathrm{eau}}\) :</span>
+                            <span class="font-bold font-mono text-emerald-700" id="valVEau">49.0 mL</span>
+                        </div>
+                        <input type="range" id="paramVEau" min="30" max="100" step="1" value="49" oninput="updateParameters()" class="w-full accent-emerald-500 cursor-pointer">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-slate-700 mb-1">
+                            <span>Température du milieu \(T\) :</span>
+                            <span class="font-bold font-mono text-amber-600" id="valTemp">40 °C</span>
+                        </div>
+                        <input type="range" id="paramTemp" min="20" max="60" step="5" value="40" oninput="updateParameters()" class="w-full accent-amber-500 cursor-pointer">
+                    </div>
+
+                    <div>
+                        <div class="flex justify-between text-slate-700 mb-1">
+                            <span>Vitesse d'animation :</span>
+                            <span class="font-bold font-mono text-indigo-600" id="valSpeed">2x</span>
+                        </div>
+                        <input type="range" id="paramSpeed" min="1" max="10" step="1" value="2" oninput="updateSimSpeed()" class="w-full accent-indigo-500 cursor-pointer">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Column 2: Graph & Tangent Analysis Tool (7 Cols) -->
+        <div class="lg:col-span-7 flex flex-col space-y-6">
+            
+            <div class="glass-panel rounded-2xl p-5 shadow-sm flex-1 flex flex-col justify-between">
+                <div>
+                    <div class="flex flex-wrap justify-between items-center mb-3 gap-2">
+                        <h2 class="font-bold text-slate-800 flex items-center gap-2">
+                            <i class="fa-solid fa-chart-line text-emerald-600"></i> Courbe \(\sigma = f(t)\) & Tangente
+                        </h2>
+                        <div class="flex items-center space-x-3 text-xs">
+                            <label class="flex items-center space-x-1 cursor-pointer">
+                                <input type="checkbox" id="chkSigmaF" checked onchange="redrawGraph()" class="rounded text-emerald-500 accent-emerald-500">
+                                <span class="font-semibold text-slate-700">\(\sigma_f = 8{,}0\text{ mS/cm}\)</span>
+                            </label>
+                            <label class="flex items-center space-x-1 cursor-pointer">
+                                <input type="checkbox" id="chkTHalf" checked onchange="redrawGraph()" class="rounded text-emerald-600 accent-emerald-600">
+                                <span class="text-emerald-700 font-semibold">\(t_{1/2}\)</span>
+                            </label>
+                            <label class="flex items-center space-x-1 cursor-pointer">
+                                <input type="checkbox" id="chkTangent" checked onchange="redrawGraph()" class="rounded text-amber-500 accent-amber-500">
+                                <span class="text-amber-700 font-semibold">Tangente à \(t\)</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Graph Canvas -->
+                    <div class="bg-white rounded-xl p-2 border border-slate-200 shadow-inner">
+                        <canvas id="graphCanvas" width="580" height="320" class="w-full h-auto block"></canvas>
+                    </div>
+                </div>
+
+                <!-- Tangent Position Interactive Controller -->
+                <div class="bg-slate-50 border border-slate-200 rounded-xl p-3.5 mt-4 space-y-2">
+                    <div class="flex justify-between items-center text-xs">
+                        <span class="font-semibold text-slate-700 flex items-center gap-1.5">
+                            <i class="fa-solid fa-ruler-horizontal text-amber-500"></i> Position de la Tangente à l'instant \(t\) :
+                        </span>
+                        <span class="font-mono font-bold text-amber-700 text-sm" id="tangentTimeDisp">t = 10 min</span>
+                    </div>
+                    <input type="range" id="tangentSlider" min="0" max="30" step="0.5" value="10" oninput="onTangentSliderChange()" class="w-full accent-amber-500 cursor-pointer">
+                    
+                    <div class="grid grid-cols-2 gap-2 text-xs pt-1 border-t border-slate-200">
+                        <div>
+                            <span class="text-slate-500">Pente de la tangente \(\frac{\mathrm{d}\sigma}{\mathrm{d}t}\) :</span>
+                            <span class="font-bold text-slate-800 font-mono block" id="tangentSlopeVal">0.27 mS / (cm&middot;min)</span>
+                        </div>
+                        <div>
+                            <span class="text-slate-500">Vitesse volumique \(v(t)\) :</span>
+                            <span class="font-bold text-amber-600 font-mono block" id="tangentVolSpeedVal">0.62 mmol / (L&middot;min)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary Callout -->
+                <div class="mt-3 text-xs text-slate-500 flex items-center justify-between px-1">
+                    <span><i class="fa-solid fa-circle-info text-emerald-600 mr-1"></i> \(\sigma_f =\) <strong id="summarySigmaF" class="text-slate-700">8.0 mS/cm</strong></span>
+                    <span>\(t_{1/2} \approx\) <strong id="summaryTHalf" class="text-emerald-700">4.6 min</strong></span>
+                    <span>\(n_i(\mathrm{RCl}) =\) <strong id="summaryNIRCl" class="text-emerald-800">9.18 mmol</strong></span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Detailed Step-by-Step Exercise Correction Section -->
+    <section class="glass-panel rounded-2xl p-6 sm:p-8 shadow-sm space-y-6" id="correction">
+        <div class="border-b border-slate-200 pb-4 flex flex-wrap justify-between items-center gap-2">
+            <div>
+                <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-3">
+                    <span class="bg-emerald-600 text-white w-9 h-9 rounded-xl flex items-center justify-center text-sm shadow">
+                        <i class="fa-solid fa-check-double"></i>
+                    </span>
+                    Correction Détaillée de l'Exercice (Cliquez sur chaque étape)
+                </h2>
+                <p class="text-sm text-slate-500 mt-1">Cliquez sur une question pour révéler la solution complète et les détails des calculs.</p>
+            </div>
+            <div class="text-xs bg-slate-100 text-slate-600 px-3 py-1.5 rounded-lg border border-slate-200 font-mono">
+                \(M(\mathrm{RCl}) = 92{,}6\text{ g/mol}\) | \(\rho_{\mathrm{RCl}} = 0{,}85\text{ g/cm}^3\) | \(V_T = 50\text{ mL}\)
+            </div>
+        </div>
+
+        <div class="space-y-4">
+
+            <!-- Question 1 Accordion -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition hover:border-emerald-400">
+                <div class="p-4 bg-slate-50/90 flex justify-between items-center cursor-pointer select-none" onclick="toggleAnswer('q1')">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                            <span class="bg-emerald-600 text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center">1</span>
+                            Question 1 : Calcul de la quantité de matière initiale \(n_i(\mathrm{RCl})\)
+                        </h3>
+                        <p class="text-xs text-slate-600 pl-8">Calculer la quantité de matière \(n_i(\mathrm{RCl})\) initiale de 2-chloro-2-méthylpropane.</p>
+                    </div>
+                    <button class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center gap-1.5 shrink-0 ml-2">
+                        <span>Afficher la réponse</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200" id="icon-q1"></i>
+                    </button>
+                </div>
+                <div id="q1" class="hidden p-4 sm:p-5 border-t border-slate-200 bg-slate-50/50 space-y-3 text-sm text-slate-700">
+                    <p class="text-slate-700 leading-relaxed">
+                        On calcule d'abord la masse \(m(\mathrm{RCl})\) contenue dans le volume \(V_{\mathrm{RCl}} = 1\text{ mL} = 1\text{ cm}^3\) grâce à la masse volumique \(\rho_{\mathrm{RCl}}\) :
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm font-mono text-center my-2">
+                        \[
+                        m(\mathrm{RCl}) = \rho_{\mathrm{RCl}} \times V_{\mathrm{RCl}} = 0{,}85\text{ g}\cdot\text{cm}^{-3} \times 1\text{ cm}^3 = 0{,}85\text{ g}
+                        \]
+                    </div>
+                    <p>
+                        Puis on en déduit la quantité de matière initiale \(n_i(\mathrm{RCl})\) :
+                    </p>
+                    <div class="bg-emerald-50 text-emerald-900 border border-emerald-200 p-3 rounded-lg text-center font-bold text-base shadow-sm">
+                        \[
+                        n_i(\mathrm{RCl}) = \frac{m(\mathrm{RCl})}{M(\mathrm{RCl})} = \frac{0{,}85\text{ g}}{92{,}6\text{ g}\cdot\text{mol}^{-1}} \approx 9{,}18 \times 10^{-3}\text{ mol} = 9{,}18\text{ mmol}
+                        \]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 2 Accordion -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition hover:border-emerald-400">
+                <div class="p-4 bg-slate-50/90 flex justify-between items-center cursor-pointer select-none" onclick="toggleAnswer('q2')">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                            <span class="bg-emerald-600 text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center">2</span>
+                            Question 2 : Tableau d'avancement & Avancement maximal \(x_{\mathrm{max}}\)
+                        </h3>
+                        <p class="text-xs text-slate-600 pl-8">Compléter le tableau d'avancement et déduire l'avancement maximal \(x_{\mathrm{max}}\).</p>
+                    </div>
+                    <button class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center gap-1.5 shrink-0 ml-2">
+                        <span>Afficher la réponse</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200" id="icon-q2"></i>
+                    </button>
+                </div>
+                <div id="q2" class="hidden p-4 sm:p-5 border-t border-slate-200 bg-slate-50/50 space-y-3 text-sm text-slate-700">
+                    <p class="text-slate-700">
+                        Voici le tableau d'avancement rempli pour la réaction d'hydrolyse :
+                    </p>
+
+                    <!-- Table -->
+                    <div class="overflow-x-auto my-3">
+                        <table class="w-full text-xs sm:text-sm text-center border-collapse bg-white rounded-lg shadow-sm border border-slate-200">
+                            <thead class="bg-slate-200/80 text-slate-800 font-bold">
+                                <tr>
+                                    <th class="p-2.5 border border-slate-300">Équation de la réaction</th>
+                                    <th class="p-2.5 border border-slate-300" colspan="5">\(\mathrm{R-Cl + 2\,H_2O \longrightarrow ROH + H_3O^+_{(aq)} + Cl^-_{(aq)}}\)</th>
+                                </tr>
+                                <tr class="bg-slate-100 text-slate-700">
+                                    <th class="p-2 border border-slate-300">État</th>
+                                    <th class="p-2 border border-slate-300">Avancement (\(\text{mol}\))</th>
+                                    <th class="p-2 border border-slate-300" colspan="5">Quantités de matière (en mol)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-slate-700 font-mono text-xs sm:text-sm">
+                                <tr>
+                                    <td class="p-2 border border-slate-200 font-semibold bg-slate-50">Initiale</td>
+                                    <td class="p-2 border border-slate-200">\(0\)</td>
+                                    <td class="p-2 border border-slate-200">\(n_i(\mathrm{RCl})\)</td>
+                                    <td class="p-2 border border-slate-200">Excès</td>
+                                    <td class="p-2 border border-slate-200">\(0\)</td>
+                                    <td class="p-2 border border-slate-200">\(0\)</td>
+                                    <td class="p-2 border border-slate-200">\(0\)</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 border border-slate-200 font-semibold bg-slate-50">Intermédiaire</td>
+                                    <td class="p-2 border border-slate-200">\(x\)</td>
+                                    <td class="p-2 border border-slate-200">\(n_i(\mathrm{RCl}) - x\)</td>
+                                    <td class="p-2 border border-slate-200">Excès</td>
+                                    <td class="p-2 border border-slate-200">\(x\)</td>
+                                    <td class="p-2 border border-slate-200">\(x\)</td>
+                                    <td class="p-2 border border-slate-200">\(x\)</td>
+                                </tr>
+                                <tr class="font-bold text-slate-900 bg-emerald-50/60">
+                                    <td class="p-2 border border-slate-200 bg-slate-50">Finale</td>
+                                    <td class="p-2 border border-slate-200">\(x_{\mathrm{max}}\)</td>
+                                    <td class="p-2 border border-slate-200">\(n_i(\mathrm{RCl}) - x_{\mathrm{max}}\)</td>
+                                    <td class="p-2 border border-slate-200">Excès</td>
+                                    <td class="p-2 border border-slate-200">\(x_{\mathrm{max}}\)</td>
+                                    <td class="p-2 border border-slate-200">\(x_{\mathrm{max}}\)</td>
+                                    <td class="p-2 border border-slate-200">\(x_{\mathrm{max}}\)</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <p class="text-slate-700">
+                        L'eau \(\mathrm{H_2O}\) étant le solvant, elle est en grand excès. Le réactif limitant est donc le 2-chloro-2-méthylpropane \(\mathrm{R-Cl}\).
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 text-center font-bold text-slate-800 shadow-sm">
+                        \[
+                        n_i(\mathrm{RCl}) - x_{\mathrm{max}} = 0 \implies x_{\mathrm{max}} = n_i(\mathrm{RCl}) \approx 9{,}18 \times 10^{-3}\text{ mol} = 9{,}18\text{ mmol}
+                        \]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 3 Accordion -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition hover:border-emerald-400">
+                <div class="p-4 bg-slate-50/90 flex justify-between items-center cursor-pointer select-none" onclick="toggleAnswer('q3')">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                            <span class="bg-emerald-600 text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center">3</span>
+                            Question 3 : Expression littérale de la conductivité \(\sigma(t)\)
+                        </h3>
+                        <p class="text-xs text-slate-600 pl-8">Trouver l'expression de \(\sigma(t)\) en fonction de \(x\), \(V_T\), \(\lambda_{\mathrm{Cl}^-}\) et \(\lambda_{\mathrm{H_3O^+}}\).</p>
+                    </div>
+                    <button class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center gap-1.5 shrink-0 ml-2">
+                        <span>Afficher la réponse</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200" id="icon-q3"></i>
+                    </button>
+                </div>
+                <div id="q3" class="hidden p-4 sm:p-5 border-t border-slate-200 bg-slate-50/50 space-y-3 text-sm text-slate-700">
+                    <p>
+                        D'après la loi de Kohlrausch, la conductivité \(\sigma(t)\) s'exprime par la somme des contributions des ions présents dans la solution :
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm text-center font-mono">
+                        \[
+                        \sigma(t) = \lambda_{\mathrm{H_3O^+}} \cdot [\mathrm{H_3O^+}] + \lambda_{\mathrm{Cl}^-} \cdot [\mathrm{Cl}^-]
+                        \]
+                    </div>
+                    <p>
+                        D'après le tableau d'avancement, à un instant \(t\), les concentrations molaire des ions apparus valent :
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm text-center font-mono">
+                        \[
+                        [\mathrm{H_3O^+}] = [\mathrm{Cl}^-] = \frac{x(t)}{V_T}
+                        \]
+                    </div>
+                    <p>En remplaçant les concentrations dans la formule de Kohlrausch :</p>
+                    <div class="bg-emerald-50 text-emerald-900 border border-emerald-200 p-3 rounded-lg text-center font-bold text-base shadow-sm">
+                        \[
+                        \sigma(t) = \left( \frac{\lambda_{\mathrm{H_3O^+}} + \lambda_{\mathrm{Cl}^-}}{V_T} \right) \cdot x(t)
+                        \]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 4 Accordion -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition hover:border-emerald-400">
+                <div class="p-4 bg-slate-50/90 flex justify-between items-center cursor-pointer select-none" onclick="toggleAnswer('q4')">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                            <span class="bg-emerald-600 text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center">4</span>
+                            Question 4 : Déduction de la relation \(x(t) = \frac{x_{\mathrm{max}}}{\sigma_f} \sigma(t)\)
+                        </h3>
+                        <p class="text-xs text-slate-600 pl-8">Démontrer la relation reliant l'avancement \(x(t)\) à la conductivité finale \(\sigma_f\).</p>
+                    </div>
+                    <button class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center gap-1.5 shrink-0 ml-2">
+                        <span>Afficher la réponse</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200" id="icon-q4"></i>
+                    </button>
+                </div>
+                <div id="q4" class="hidden p-4 sm:p-5 border-t border-slate-200 bg-slate-50/50 space-y-3 text-sm text-slate-700">
+                    <p>
+                        À l'état final (\(t \to \infty\)), l'avancement atteint \(x_{\mathrm{max}}\) et la conductivité vaut \(\sigma_f\) :
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm text-center font-mono">
+                        \[
+                        \sigma_f = \left( \frac{\lambda_{\mathrm{H_3O^+}} + \lambda_{\mathrm{Cl}^-}}{V_T} \right) \cdot x_{\mathrm{max}}
+                        \]
+                    </div>
+                    <p>
+                        En effectuant le rapport de l'expression de \(\sigma(t)\) sur celle de \(\sigma_f\) :
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm text-center font-mono">
+                        \[
+                        \frac{\sigma(t)}{\sigma_f} = \frac{\left( \frac{\lambda_{\mathrm{H_3O^+}} + \lambda_{\mathrm{Cl}^-}}{V_T} \right) \cdot x(t)}{\left( \frac{\lambda_{\mathrm{H_3O^+}} + \lambda_{\mathrm{Cl}^-}}{V_T} \right) \cdot x_{\mathrm{max}}} = \frac{x(t)}{x_{\mathrm{max}}}
+                        \]
+                    </div>
+                    <p>En isolant \(x(t)\), on obtient l'expression demandée :</p>
+                    <div class="bg-emerald-50 text-emerald-900 border border-emerald-200 p-3 rounded-lg text-center font-bold text-base shadow-sm">
+                        \[
+                        x(t) = \frac{x_{\mathrm{max}}}{\sigma_f} \cdot \sigma(t)
+                        \]
+                    </div>
+                </div>
+            </div>
+
+            <!-- Question 5 Accordion -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition hover:border-emerald-400">
+                <div class="p-4 bg-slate-50/90 flex justify-between items-center cursor-pointer select-none" onclick="toggleAnswer('q5')">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                            <span class="bg-emerald-600 text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center">5</span>
+                            Question 5 : Détermination du temps de demi-réaction \(t_{1/2}\)
+                        </h3>
+                        <p class="text-xs text-slate-600 pl-8">Définition rigoureuse, démonstration mathématique, méthode graphique pas à pas et remarques cinétiques.</p>
+                    </div>
+                    <button class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center gap-1.5 shrink-0 ml-2">
+                        <span>Afficher la réponse</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200" id="icon-q5"></i>
+                    </button>
+                </div>
+                <div id="q5" class="hidden p-4 sm:p-5 border-t border-slate-200 bg-slate-50/50 space-y-4 text-sm text-slate-700">
+                    
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-sm">
+                            <span class="bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded text-xs font-semibold">1. Définition théorique</span>
+                        </h4>
+                        <p class="leading-relaxed">
+                            Le <strong>temps de demi-réaction \(t_{1/2}\)</strong> est la durée au bout de laquelle l'avancement de la réaction \(x(t)\) atteint la moitié de sa valeur finale \(x_{\mathrm{max}}\).
+                        </p>
+                        <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 font-mono text-center font-semibold text-slate-800">
+                            \[ x(t_{1/2}) = \frac{x_{\mathrm{max}}}{2} \]
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-2">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-sm">
+                            <span class="bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded text-xs font-semibold">2. Démonstration de la valeur de \(\sigma(t_{1/2})\)</span>
+                        </h4>
+                        <p class="leading-relaxed">
+                            D'après la relation démontrée à la <strong>Question 4</strong> :
+                        </p>
+                        <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 font-mono text-center text-slate-800">
+                            \[ x(t) = \frac{x_{\mathrm{max}}}{\sigma_f} \cdot \sigma(t) \]
+                        </div>
+                        <p class="leading-relaxed">
+                            À l'instant particulier \(t = t_{1/2}\), en remplaçant \(x(t_{1/2})\) par \(\frac{x_{\mathrm{max}}}{2}\) :
+                        </p>
+                        <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 font-mono text-center text-slate-800">
+                            \[ \frac{x_{\mathrm{max}}}{2} = \frac{x_{\mathrm{max}}}{\sigma_f} \cdot \sigma(t_{1/2}) \]
+                        </div>
+                        <p class="leading-relaxed">
+                            En simplifiant par \(x_{\mathrm{max}}\), on isole la conductivité à demi-réaction :
+                        </p>
+                        <div class="bg-emerald-50 border border-emerald-200 p-3 rounded-lg text-center font-bold text-emerald-900 shadow-sm">
+                            \[ \sigma(t_{1/2}) = \frac{\sigma_f}{2} \]
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
+                        <h4 class="font-bold text-slate-900 flex items-center gap-2 text-sm">
+                            <span class="bg-emerald-100 text-emerald-800 px-2.5 py-0.5 rounded text-xs font-semibold">3. Application numérique & Méthode graphique</span>
+                        </h4>
+                        
+                        <p><strong>Calcul en ordonnée :</strong></p>
+                        <div class="bg-slate-50 p-2.5 rounded-lg border border-slate-200 font-mono text-center font-bold text-slate-800">
+                            \[ \sigma(t_{1/2}) = \frac{8{,}0\text{ mS}\cdot\text{cm}^{-1}}{2} = 4{,}0\text{ mS}\cdot\text{cm}^{-1} \]
+                        </div>
+
+                        <div class="bg-emerald-600 text-white p-3.5 rounded-xl text-center font-bold text-base shadow-sm mt-2">
+                            Valeur lue par projection sur l'axe des temps : \(t_{1/2} \approx 4{,}6\text{ min}\)
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- Question 6 Accordion -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition hover:border-emerald-400">
+                <div class="p-4 bg-slate-50/90 flex justify-between items-center cursor-pointer select-none" onclick="toggleAnswer('q6')">
+                    <div class="space-y-1">
+                        <h3 class="font-bold text-slate-800 text-base flex items-center gap-2">
+                            <span class="bg-emerald-600 text-white w-6 h-6 rounded-lg text-xs flex items-center justify-center">6</span>
+                            Question 6 : Calcul de la vitesse volumique de réaction à \(t = 10\text{ min}\)
+                        </h3>
+                        <p class="text-xs text-slate-600 pl-8">Calculer la vitesse volumique de la réaction à l'instant \(t = 10\text{ min}\) à l'aide de la tangente.</p>
+                    </div>
+                    <button class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center gap-1.5 shrink-0 ml-2">
+                        <span>Afficher la réponse</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200" id="icon-q6"></i>
+                    </button>
+                </div>
+                <div id="q6" class="hidden p-4 sm:p-5 border-t border-slate-200 bg-slate-50/50 space-y-3 text-sm text-slate-700">
+                    <p>
+                        <strong>Expression de la vitesse volumique :</strong>
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm text-center font-bold text-slate-800">
+                        \[
+                        v(t) = \frac{1}{V_T} \cdot \frac{\mathrm{d}x(t)}{\mathrm{d}t}
+                        \]
+                    </div>
+                    <p>
+                        En remplaçant \(x(t) = \frac{x_{\mathrm{max}}}{\sigma_f} \cdot \sigma(t)\), on obtient :
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm text-center font-mono font-bold text-amber-700">
+                        \[
+                        v(t) = \left( \frac{x_{\mathrm{max}}}{V_T \cdot \sigma_f} \right) \cdot \left( \frac{\mathrm{d}\sigma}{\mathrm{d}t} \right)_{t}
+                        \]
+                    </div>
+                    <p>
+                        <strong>Calcul de la pente de la tangente à \(t = 10\text{ min}\) :</strong><br>
+                        Sur le graphique fourni, la tangente tracée à \(t = 10\text{ min}\) passe par les points \((0\,;\,3{,}2)\) et \((15\,;\,8{,}0)\) :
+                    </p>
+                    <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-sm text-center font-mono">
+                        \[
+                        \left( \frac{\mathrm{d}\sigma}{\mathrm{d}t} \right)_{t=10} = \frac{8{,}0 - 3{,}2}{15 - 0} = \frac{4{,}8}{15} = 0{,}32\text{ mS}\cdot\text{cm}^{-1}\cdot\text{min}^{-1}
+                        \]
+                    </div>
+                    <p>
+                        <strong>Application numérique :</strong> Avec \(x_{\mathrm{max}} = 9{,}18 \times 10^{-3}\text{ mol}\), \(V_T = 0{,}050\text{ L}\), et \(\sigma_f = 8{,}0\text{ mS}\cdot\text{cm}^{-1}\) :
+                    </p>
+                    <div class="bg-emerald-50 text-emerald-900 border border-emerald-200 p-3 rounded-lg text-center font-bold text-base shadow-sm">
+                        \[
+                        v(10\text{ min}) \approx \frac{9{,}18 \times 10^{-3}\text{ mol}}{0{,}050\text{ L} \times 8{,}0} \times 0{,}32 \approx 7{,}34 \times 10^{-4}\text{ mol}\cdot\text{L}^{-1}\cdot\text{min}^{-1}
+                        \]
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Interactive Q&A Accordion Section -->
+    <section class="glass-panel rounded-2xl p-6 sm:p-8 shadow-sm space-y-6" id="quiz">
+        <div class="border-b border-slate-200 pb-3 flex justify-between items-center">
+            <div>
+                <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+                    <i class="fa-solid fa-circle-question text-emerald-600"></i> Questions de Révision & Notions Clés
+                </h2>
+                <p class="text-xs text-slate-500 mt-0.5">Cliquez sur chaque question pour tester vos connaissances avant de vérifier la réponse.</p>
+            </div>
+            <span class="text-xs font-semibold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full">
+                <i class="fa-solid fa-hand-pointer mr-1"></i> Cliquez pour révéler
+            </span>
+        </div>
+
+        <div class="space-y-4">
+
+            <!-- FAQ 1 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition hover:border-emerald-300">
+                <div class="p-4 bg-slate-50/80 flex justify-between items-center cursor-pointer select-none" onclick="toggleAnswer('faq1')">
+                    <span class="font-semibold text-slate-800 text-sm flex items-center gap-2">
+                        <span class="bg-emerald-600 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-bold">A</span>
+                        Pourquoi la conductivité \(\sigma(t)\) augmente-t-elle au cours du temps ?
+                    </span>
+                    <button class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center gap-1.5 shrink-0 ml-2">
+                        <span>Afficher la réponse</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200" id="icon-faq1"></i>
+                    </button>
+                </div>
+                <div id="faq1" class="hidden p-4 border-t border-slate-200 bg-emerald-50/40 text-slate-700 text-sm space-y-2">
+                    <p class="font-bold text-emerald-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-check-circle text-emerald-600"></i> Explication :
+                    </p>
+                    <p>
+                        Initialement, la solution ne contient que des molécules neutres (\(\mathrm{R-Cl}\) et \(\mathrm{H_2O}\)), la conductivité est donc quasi nulle. Au cours de la réaction, il y a formation d'ions \(\mathrm{H_3O^+}\) et \(\mathrm{Cl^-}\). L'augmentation progressive de la concentration de ces ions conducteurs entraîne l'augmentation de la conductivité de la solution.
+                    </p>
+                </div>
+            </div>
+
+            <!-- FAQ 2 -->
+            <div class="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm transition hover:border-emerald-300">
+                <div class="p-4 bg-slate-50/80 flex justify-between items-center cursor-pointer select-none" onclick="toggleAnswer('faq2')">
+                    <span class="font-semibold text-slate-800 text-sm flex items-center gap-2">
+                        <span class="bg-emerald-600 text-white w-6 h-6 rounded-full inline-flex items-center justify-center text-xs font-bold">B</span>
+                        Quel est l'effet d'une augmentation de la température sur la vitesse de réaction ?
+                    </span>
+                    <button class="text-xs bg-emerald-50 hover:bg-emerald-100 text-emerald-700 font-medium px-3 py-1.5 rounded-lg border border-emerald-200 transition flex items-center gap-1.5 shrink-0 ml-2">
+                        <span>Afficher la réponse</span>
+                        <i class="fa-solid fa-chevron-down text-xs transition-transform duration-200" id="icon-faq2"></i>
+                    </button>
+                </div>
+                <div id="faq2" class="hidden p-4 border-t border-slate-200 bg-emerald-50/40 text-slate-700 text-sm space-y-2">
+                    <p class="font-bold text-emerald-800 flex items-center gap-1.5">
+                        <i class="fa-solid fa-check-circle text-emerald-600"></i> Explication :
+                    </p>
+                    <p>
+                        La température est un <strong>facteur cinétique</strong>. Si la température augmente, l'agitation thermique augmente, augmentant le nombre de chocs efficaces entre molécules par unité de temps. La réaction devient donc plus rapide et le temps de demi-réaction \(t_{1/2}\) diminue.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</main>
+
+<script>
+    // --- State Variables ---
+    let V_RCl = 1.0;     // mL
+    let V_Eau = 49.0;    // mL
+    let T_Celsius = 40;  // °C
+    let simSpeedMultiplier = 2; // speed ratio
+
+    const M_RCl = 92.6;  // g/mol
+    const rho_RCl = 0.85; // g/cm3
+
+    let V_T = 50.0;      // mL total
+    let n0_RCl = 0;      // mol
+    let x_max = 0;       // mol
+    let sigma_f = 8.0;   // mS/cm
+    let k_rate = 0.15;   // rate constant (min^-1) calibrated for t1/2 approx 4.6 min at 40°C
+
+    let simTimer = null;
+    let currentTime = 0; // minutes
+    const maxGraphTime = 30; // minutes
+
+    let selectedTangentTime = 10; // minutes for interactive tangent slider
+
+    // Bubbles/ions particles for canvas animation
+    let particles = [];
+
+    // --- Canvas Contexts ---
+    const expCanvas = document.getElementById('expCanvas');
+    const expCtx = expCanvas.getContext('2d');
+
+    const graphCanvas = document.getElementById('graphCanvas');
+    const graphCtx = graphCanvas.getContext('2d');
+
+    // --- Initialization & KaTeX Auto-Render ---
+    window.onload = function() {
+        calculateTheoreticalValues();
+        initParticles();
+        drawExperiment(0);
+        drawGraph();
+        updateUIStats(0);
+
+        if (typeof renderMathInElement === 'function') {
+            renderMathInElement(document.body, {
+                delimiters: [
+                    {left: '\\[', right: '\\]', display: true},
+                    {left: '\\(', right: '\\)', display: false}
+                ],
+                throwOnError: false
+            });
+        }
+    };
+
+    function calculateTheoreticalValues() {
+        V_T = V_RCl + V_Eau; // mL
+        let mass_RCl = rho_RCl * V_RCl; // g
+        n0_RCl = mass_RCl / M_RCl; // mol
+        x_max = n0_RCl; // mol
+
+        // Temperature effect on rate constant k
+        k_rate = 0.15 * Math.pow(1.05, T_Celsius - 40);
+
+        // Update callout summaries
+        document.getElementById('summarySigmaF').innerText = sigma_f.toFixed(1) + " mS/cm";
+        let tHalf = Math.LN2 / k_rate;
+        document.getElementById('summaryTHalf').innerText = tHalf.toFixed(1) + " min";
+        document.getElementById('summaryNIRCl').innerText = (n0_RCl * 1000).toFixed(2) + " mmol";
+    }
+
+    function initParticles() {
+        particles = [];
+        for (let i = 0; i < 35; i++) {
+            particles.push({
+                x: 180 + Math.random() * 110,
+                y: 165 + Math.random() * 65,
+                vx: (Math.random() - 0.5) * 1.5,
+                vy: (Math.random() - 0.5) * 1.5,
+                type: Math.random() > 0.5 ? 'H3O+' : 'Cl-'
+            });
+        }
+    }
+
+    // --- Kinetic Model Functions ---
+    function getSigmaAtTime(t) {
+        if (t <= 0) return 0;
+        return sigma_f * (1 - Math.exp(-k_rate * t));
+    }
+
+    function getAdvancementAtTime(t) {
+        let sig = getSigmaAtTime(t);
+        return (x_max / sigma_f) * sig; // mol
+    }
+
+    function getSigmaDerivativeAtTime(t) {
+        return (sigma_f * k_rate) * Math.exp(-k_rate * t); // mS/(cm.min)
+    }
+
+    function getVolumetricSpeedAtTime(t) {
+        let deriv = getSigmaDerivativeAtTime(t); // mS/(cm.min)
+        let V_sol_L = V_T / 1000;
+        let speed_mol_per_L_min = (x_max / (V_sol_L * sigma_f)) * deriv;
+        return speed_mol_per_L_min * 1000; // mmol / (L.min)
+    }
+
+    // --- Detailed Visual Experiment Drawing ---
+    function drawExperiment(currentSigma) {
+        expCtx.clearRect(0, 0, expCanvas.width, expCanvas.height);
+
+        // 1. Magnetic Stirrer Base
+        expCtx.fillStyle = '#334155';
+        expCtx.beginPath();
+        expCtx.roundRect(140, 235, 210, 35, 8);
+        expCtx.fill();
+        expCtx.strokeStyle = '#64748b';
+        expCtx.lineWidth = 1.5;
+        expCtx.stroke();
+
+        // Control Knobs on Stirrer
+        expCtx.fillStyle = '#ef4444';
+        expCtx.beginPath(); expCtx.arc(175, 252, 6, 0, Math.PI * 2); expCtx.fill();
+        expCtx.fillStyle = '#10b981';
+        expCtx.beginPath(); expCtx.arc(200, 252, 5, 0, Math.PI * 2); expCtx.fill();
+        expCtx.fillStyle = '#94a3b8';
+        expCtx.beginPath(); expCtx.arc(225, 252, 5, 0, Math.PI * 2); expCtx.fill();
+
+        // Label Stirrer
+        expCtx.fillStyle = '#94a3b8';
+        expCtx.font = '9px Inter, sans-serif';
+        expCtx.fillText("Agitateur Magnétique", 260, 256);
+
+        // 2. Beaker Outline & Solution Fill
+        expCtx.strokeStyle = '#f8fafc';
+        expCtx.lineWidth = 3;
+        expCtx.beginPath();
+        expCtx.moveTo(170, 130);
+        expCtx.lineTo(170, 232);
+        expCtx.lineTo(310, 232);
+        expCtx.lineTo(310, 130);
+        expCtx.stroke();
+
+        // Liquid Solution Fill
+        expCtx.fillStyle = 'rgba(56, 189, 248, 0.30)';
+        expCtx.fillRect(173, 155, 134, 75);
+
+        // Liquid surface menu line
+        expCtx.strokeStyle = '#38bdf8';
+        expCtx.lineWidth = 2;
+        expCtx.beginPath();
+        expCtx.moveTo(173, 155);
+        expCtx.lineTo(307, 155);
+        expCtx.stroke();
+
+        // Magnetic stirrer bar inside beaker
+        let spinAngle = (Date.now() / 120) % (Math.PI * 2);
+        expCtx.save();
+        expCtx.translate(240, 224);
+        expCtx.rotate(spinAngle);
+        expCtx.fillStyle = '#ffffff';
+        expCtx.strokeStyle = '#cbd5e1';
+        expCtx.lineWidth = 1;
+        expCtx.beginPath();
+        expCtx.roundRect(-14, -4, 28, 8, 4);
+        expCtx.fill();
+        expCtx.stroke();
+        expCtx.restore();
+
+        // 3. --- CONDUCTIMETRIC CELL & PROBE ---
+        const probeX = 230;
+
+        // CABLE CONNECTING PROBE TO CONDUCTIMETER
+        expCtx.strokeStyle = '#10b981';
+        expCtx.lineWidth = 3.5;
+        expCtx.beginPath();
+        expCtx.moveTo(probeX, 45);
+        expCtx.bezierCurveTo(probeX - 40, 20, 110, 25, 85, 35);
+        expCtx.stroke();
+
+        // Top Probe Handle
+        expCtx.fillStyle = '#1e293b';
+        expCtx.strokeStyle = '#10b981';
+        expCtx.lineWidth = 1.5;
+        expCtx.beginPath();
+        expCtx.roundRect(probeX - 8, 45, 16, 15, 3);
+        expCtx.fill();
+        expCtx.stroke();
+
+        // Upper Support Shaft
+        expCtx.fillStyle = '#334155';
+        expCtx.fillRect(probeX - 5, 60, 10, 50);
+
+        // Glass Body Sheath
+        expCtx.fillStyle = 'rgba(241, 245, 249, 0.85)';
+        expCtx.strokeStyle = '#38bdf8';
+        expCtx.lineWidth = 1.5;
+        expCtx.beginPath();
+        expCtx.roundRect(probeX - 9, 110, 18, 90, 6);
+        expCtx.fill();
+        expCtx.stroke();
+
+        // Inner Twin Wires
+        expCtx.strokeStyle = '#0284c7';
+        expCtx.lineWidth = 1.5;
+        expCtx.beginPath();
+        expCtx.moveTo(probeX - 4, 60);
+        expCtx.lineTo(probeX - 4, 180);
+        expCtx.moveTo(probeX + 4, 60);
+        expCtx.lineTo(probeX + 4, 180);
+        expCtx.stroke();
+
+        // Outer Slot Openings on Glass Sheath
+        expCtx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+        expCtx.fillRect(probeX - 7, 170, 14, 25);
+
+        // TWO PLATINUM ELECTRODES
+        expCtx.fillStyle = '#94a3b8';
+        expCtx.strokeStyle = '#f8fafc';
+        expCtx.lineWidth = 1;
+        expCtx.fillRect(probeX - 6, 175, 3, 20);
+        expCtx.strokeRect(probeX - 6, 175, 3, 20);
+
+        expCtx.fillStyle = '#94a3b8';
+        expCtx.strokeStyle = '#f8fafc';
+        expCtx.lineWidth = 1;
+        expCtx.fillRect(probeX + 3, 175, 3, 20);
+        expCtx.strokeRect(probeX + 3, 175, 3, 20);
+
+        // Electric Field Lines
+        if (currentSigma > 0.1) {
+            let pulse = (Math.sin(Date.now() / 150) + 1) / 2;
+            expCtx.strokeStyle = `rgba(16, 185, 129, ${0.4 + pulse * 0.6})`;
+            expCtx.lineWidth = 1.5;
+            for (let y = 180; y <= 192; y += 4) {
+                expCtx.beginPath();
+                expCtx.moveTo(probeX - 3, y);
+                expCtx.lineTo(probeX + 3, y);
+                expCtx.stroke();
+            }
+        }
+
+        // 4. ANNOTATIONS & POINTERS
+        expCtx.strokeStyle = '#f59e0b';
+        expCtx.lineWidth = 1.5;
+        expCtx.setLineDash([3, 2]);
+        expCtx.beginPath();
+        expCtx.moveTo(probeX + 10, 140);
+        expCtx.lineTo(325, 110);
+        expCtx.stroke();
+        expCtx.setLineDash([]);
+
+        expCtx.fillStyle = '#f59e0b';
+        expCtx.beginPath();
+        expCtx.roundRect(325, 95, 145, 30, 6);
+        expCtx.fill();
+
+        expCtx.fillStyle = '#0f172a';
+        expCtx.font = 'bold 11px Inter, sans-serif';
+        expCtx.fillText("Cellule Conductimétrique", 332, 110);
+        expCtx.font = '9px Inter, sans-serif';
+        expCtx.fillText("(2 électrodes en platine)", 332, 121);
+
+        // Submerged solution labels
+        expCtx.fillStyle = '#38bdf8';
+        expCtx.font = '10px Inter, sans-serif';
+        expCtx.fillText("Eau + Acétone (49 mL)", 320, 175);
+
+        expCtx.fillStyle = '#a7f3d0';
+        expCtx.fillText("R-Cl (1 mL)", 320, 190);
+
+        expCtx.fillStyle = '#fbbf24';
+        expCtx.fillText("Ions H\u2083O\u207A + Cl\u207B", 320, 205);
+
+        // 5. Floating Ion Particles Animation
+        let ionDensity = Math.min(1, currentSigma / sigma_f);
+        if (ionDensity > 0.05) {
+            particles.forEach((p, idx) => {
+                if (idx / particles.length <= ionDensity) {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 178 || p.x > 302) p.vx *= -1;
+                    if (p.y < 160 || p.y > 225) p.vy *= -1;
+
+                    expCtx.fillStyle = p.type === 'H3O+' ? '#f43f5e' : '#10b981';
+                    expCtx.beginPath();
+                    expCtx.arc(p.x, p.y, 2.5, 0, Math.PI * 2);
+                    expCtx.fill();
+                }
+            });
+        }
+    }
+
+    // --- Graph Rendering ---
+    function drawGraph() {
+        const w = graphCanvas.width;
+        const h = graphCanvas.height;
+        graphCtx.clearRect(0, 0, w, h);
+
+        const padLeft = 50;
+        const padBottom = 35;
+        const padRight = 20;
+        const padTop = 25;
+
+        const graphW = w - padLeft - padRight;
+        const graphH = h - padTop - padBottom;
+
+        // Background Grid
+        graphCtx.strokeStyle = '#f1f5f9';
+        graphCtx.lineWidth = 1;
+        for (let t = 0; t <= maxGraphTime; t += 5) {
+            let x = padLeft + (t / maxGraphTime) * graphW;
+            graphCtx.beginPath(); graphCtx.moveTo(x, padTop); graphCtx.lineTo(x, h - padBottom); graphCtx.stroke();
+        }
+        for (let s = 0; s <= 10; s += 2) {
+            let y = (h - padBottom) - (s / 10) * graphH;
+            graphCtx.beginPath(); graphCtx.moveTo(padLeft, y); graphCtx.lineTo(w - padRight, y); graphCtx.stroke();
+        }
+
+        // Axes
+        graphCtx.strokeStyle = '#334155';
+        graphCtx.lineWidth = 1.5;
+        graphCtx.beginPath();
+        graphCtx.moveTo(padLeft, padTop); graphCtx.lineTo(padLeft, h - padBottom);
+        graphCtx.lineTo(w - padRight, h - padBottom);
+        graphCtx.stroke();
+
+        // Labels
+        graphCtx.fillStyle = '#475569';
+        graphCtx.font = '11px Inter, sans-serif';
+        graphCtx.fillText('t (min)', w - 45, h - 10);
+        graphCtx.fillText('\u03C3 (mS\u00B7cm\u207B\u00B9)', 10, 18);
+
+        // X Ticks
+        for (let t = 0; t <= maxGraphTime; t += 5) {
+            let x = padLeft + (t / maxGraphTime) * graphW;
+            graphCtx.fillText(t, x - 5, h - 18);
+        }
+
+        // Y Ticks
+        for (let s = 0; s <= 10; s += 2) {
+            let y = (h - padBottom) - (s / 10) * graphH;
+            graphCtx.fillText(s, 22, y + 4);
+        }
+
+        // Asymptote line (sigma_f = 8 mS/cm)
+        if (document.getElementById('chkSigmaF').checked) {
+            let yMax = (h - padBottom) - (sigma_f / 10) * graphH;
+            graphCtx.strokeStyle = '#059669';
+            graphCtx.setLineDash([4, 4]);
+            graphCtx.lineWidth = 1.5;
+            graphCtx.beginPath();
+            graphCtx.moveTo(padLeft, yMax); graphCtx.lineTo(w - padRight, yMax);
+            graphCtx.stroke();
+            graphCtx.setLineDash([]);
+
+            graphCtx.fillStyle = '#059669';
+            graphCtx.font = 'bold 10px Inter, sans-serif';
+            graphCtx.fillText(`\u03C3f = ${sigma_f.toFixed(1)} mS/cm`, w - 120, yMax - 5);
+        }
+
+        // t1/2 indicator
+        let tHalf = Math.LN2 / k_rate;
+        if (document.getElementById('chkTHalf').checked && currentTime >= tHalf) {
+            let sigmaHalf = sigma_f / 2;
+            let xHalf = padLeft + (tHalf / maxGraphTime) * graphW;
+            let yHalf = (h - padBottom) - (sigmaHalf / 10) * graphH;
+
+            graphCtx.strokeStyle = '#10b981';
+            graphCtx.setLineDash([3, 3]);
+            graphCtx.lineWidth = 1.5;
+            graphCtx.beginPath();
+            graphCtx.moveTo(padLeft, yHalf); graphCtx.lineTo(xHalf, yHalf);
+            graphCtx.moveTo(xHalf, yHalf); graphCtx.lineTo(xHalf, h - padBottom);
+            graphCtx.stroke();
+            graphCtx.setLineDash([]);
+
+            graphCtx.fillStyle = '#047857';
+            graphCtx.font = 'bold 10px Inter, sans-serif';
+            graphCtx.fillText('t\u00BD', xHalf - 8, h - 5);
+            graphCtx.fillText('\u03C3f/2', 8, yHalf + 3);
+        }
+
+        // Kinetic Curve plot
+        graphCtx.strokeStyle = '#0284c7';
+        graphCtx.lineWidth = 2.5;
+        graphCtx.beginPath();
+
+        let firstPoint = true;
+        for (let t = 0; t <= currentTime; t += 0.2) {
+            let sig = getSigmaAtTime(t);
+            let x = padLeft + (t / maxGraphTime) * graphW;
+            let y = (h - padBottom) - (sig / 10) * graphH;
+
+            if (firstPoint) {
+                graphCtx.moveTo(x, y);
+                firstPoint = false;
+            } else {
+                graphCtx.lineTo(x, y);
+            }
+        }
+        graphCtx.stroke();
+
+        // Tangent line rendering
+        if (document.getElementById('chkTangent').checked && selectedTangentTime <= currentTime) {
+            drawTangentLine(selectedTangentTime, padLeft, padBottom, graphW, graphH, w, h);
+        }
+    }
+
+    function drawTangentLine(tPoint, padLeft, padBottom, graphW, graphH, canvasW, canvasH) {
+        let sigPoint = getSigmaAtTime(tPoint);
+        let slope = getSigmaDerivativeAtTime(tPoint);
+
+        let xPoint = padLeft + (tPoint / maxGraphTime) * graphW;
+        let yPoint = (canvasH - padBottom) - (sigPoint / 10) * graphH;
+
+        let dt = 8; 
+        let t1 = Math.max(0, tPoint - dt);
+        let t2 = Math.min(maxGraphTime, tPoint + dt);
+
+        let sig1 = sigPoint + slope * (t1 - tPoint);
+        let sig2 = sigPoint + slope * (t2 - tPoint);
+
+        let x1 = padLeft + (t1 / maxGraphTime) * graphW;
+        let y1 = (canvasH - padBottom) - (sig1 / 10) * graphH;
+        let x2 = padLeft + (t2 / maxGraphTime) * graphW;
+        let y2 = (canvasH - padBottom) - (sig2 / 10) * graphH;
+
+        graphCtx.strokeStyle = '#d97706';
+        graphCtx.lineWidth = 2;
+        graphCtx.beginPath();
+        graphCtx.moveTo(x1, y1);
+        graphCtx.lineTo(x2, y2);
+        graphCtx.stroke();
+
+        graphCtx.fillStyle = '#d97706';
+        graphCtx.beginPath();
+        graphCtx.arc(xPoint, yPoint, 4, 0, Math.PI * 2);
+        graphCtx.fill();
+    }
+
+    // --- UI Update Routines ---
+    function updateUIStats(t) {
+        let sig = getSigmaAtTime(t);
+        let adv_mmol = getAdvancementAtTime(t) * 1000;
+        let speed = getSigmaDerivativeAtTime(t);
+
+        document.getElementById('dispSigma').innerText = sig.toFixed(3).padStart(6, '0');
+        document.getElementById('dispTime').innerText = t.toFixed(1) + " min";
+        document.getElementById('dispAdv').innerText = adv_mmol.toFixed(2) + " mmol";
+        document.getElementById('dispSpeed').innerText = speed.toFixed(2) + " mS/(cm·min)";
+
+        let slider = document.getElementById('tangentSlider');
+        slider.max = Math.max(1, t.toFixed(1));
+        if (selectedTangentTime > t) {
+            selectedTangentTime = t;
+            slider.value = selectedTangentTime;
+        }
+        updateTangentDisplay();
+    }
+
+    function updateTangentDisplay() {
+        document.getElementById('tangentTimeDisp').innerText = "t = " + selectedTangentTime.toFixed(1) + " min";
+        let slope = getSigmaDerivativeAtTime(selectedTangentTime);
+        let volSpeed = getVolumetricSpeedAtTime(selectedTangentTime);
+
+        document.getElementById('tangentSlopeVal').innerText = slope.toFixed(2) + " mS / (cm·min)";
+        document.getElementById('tangentVolSpeedVal').innerText = volSpeed.toFixed(2) + " mmol / (L·min)";
+    }
+
+    // --- Simulation Controls ---
+    function updateSimulationStep() {
+        if (currentTime <= maxGraphTime) {
+            currentTime += 0.1 * (simSpeedMultiplier / 2);
+            let currentSig = getSigmaAtTime(currentTime);
+
+            drawExperiment(currentSig);
+            drawGraph();
+            updateUIStats(currentTime);
+        } else {
+            pauseSim();
+        }
+    }
+
+    function startSim() {
+        if (simTimer) clearInterval(simTimer);
+        simTimer = setInterval(updateSimulationStep, 40);
+        document.getElementById('btnStart').classList.add('opacity-50', 'pointer-events-none');
+    }
+
+    function pauseSim() {
+        if (simTimer) clearInterval(simTimer);
+        simTimer = null;
+        document.getElementById('btnStart').classList.remove('opacity-50', 'pointer-events-none');
+    }
+
+    function resetSim() {
+        pauseSim();
+        currentTime = 0;
+        selectedTangentTime = 10;
+        document.getElementById('tangentSlider').value = 10;
+        drawExperiment(0);
+        drawGraph();
+        updateUIStats(0);
+    }
+
+    function redrawGraph() {
+        drawGraph();
+    }
+
+    function onTangentSliderChange() {
+        selectedTangentTime = parseFloat(document.getElementById('tangentSlider').value);
+        updateTangentDisplay();
+        drawGraph();
+    }
+
+    // --- Parameter Sliders Event Listeners ---
+    function updateParameters() {
+        V_RCl = parseFloat(document.getElementById('paramVRCl').value);
+        V_Eau = parseFloat(document.getElementById('paramVEau').value);
+        T_Celsius = parseInt(document.getElementById('paramTemp').value);
+
+        document.getElementById('valVRCl').innerText = V_RCl.toFixed(1) + " mL";
+        document.getElementById('valVEau').innerText = V_Eau.toFixed(1) + " mL";
+        document.getElementById('valTemp').innerText = T_Celsius + " °C";
+
+        calculateTheoreticalValues();
+        resetSim();
+    }
+
+    function updateSimSpeed() {
+        simSpeedMultiplier = parseInt(document.getElementById('paramSpeed').value);
+        document.getElementById('valSpeed').innerText = simSpeedMultiplier + "x";
+    }
+
+    function resetParameters() {
+        document.getElementById('paramVRCl').value = 1.0;
+        document.getElementById('paramVEau').value = 49.0;
+        document.getElementById('paramTemp').value = 40;
+        document.getElementById('paramSpeed').value = 2;
+        updateParameters();
+        updateSimSpeed();
+    }
+
+    // --- Toggle Answer Function ---
+    function toggleAnswer(ansId) {
+        let ansElem = document.getElementById(ansId);
+        let iconElem = document.getElementById('icon-' + ansId);
+
+        if (ansElem.classList.contains('hidden')) {
+            ansElem.classList.remove('hidden');
+            if (iconElem) iconElem.classList.add('rotate-180');
+            
+            if (window.renderMathInElement) {
+                renderMathInElement(ansElem, {
+                    delimiters: [
+                        {left: '\\[', right: '\\]', display: true},
+                        {left: '\\(', right: '\\)', display: false}
+                    ],
+                    throwOnError: false
+                });
+            }
+        } else {
+            ansElem.classList.add('hidden');
+            if (iconElem) iconElem.classList.remove('rotate-180');
+        }
+    }
+</script>
+
+</body>
+</html>
